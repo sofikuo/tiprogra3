@@ -61,7 +61,6 @@ export default class Registro extends Component {
     render() {
         return (
             <View>
-                <Text>Register</Text>
                 <TextInput
                     style={
                         styles.input
