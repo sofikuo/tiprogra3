@@ -14,7 +14,7 @@ export default class Registro extends Component {
         this.state = {
             email: '',
             password: '',
-            error: false
+            username: ''
         }
     }
 
