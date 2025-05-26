@@ -1,12 +1,19 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Home from '../screens/Home';
 import Registro from '../screens/Registro';
 import Login from '../screens/Login';
-import Home from '../screens/Home';
-import Perfil from '../screens/MiPerfil';
-
-import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
+function TabNavigation() {
+    return(
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={Home} />   
+            <Tab.Screen name="Registro" component={Registro} />
+             <Tab.Screen name="Login" component={Login} />
+        </Tab.Navigator>
+    );
+}
+
+export default TabNavigation;
