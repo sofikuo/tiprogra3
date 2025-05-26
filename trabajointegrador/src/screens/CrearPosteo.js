@@ -26,8 +26,9 @@ export default class CrearPosteo extends Component {
     const { textoPost } = this.state;
     const user = auth.currentUser;
 
-    if (!textoPost.trim()) {
-      this.setState({ error: 'El texto del post no puede estar vacío' });
+    // Validación del texto del post
+    if (textoPost === '') {
+      this.setState({ error: 'El post no puede estar vacio' });
       return;
     }
 
@@ -36,21 +37,19 @@ export default class CrearPosteo extends Component {
         texto: textoPost,
         emailCreador: user.email,
         createdAt: Date.now(),
-        likes: [], // Array para guardar emails de usuarios que dieron like
+        likes: [], 
       };
 
       db.collection('posts').add(nuevoPost)
         .then(() => {
           Alert.alert('Éxito', 'Post creado correctamente');
           this.setState({ textoPost: '' });
-          this.props.navigation.navigate('Home'); // Redirigir a la pantalla principal
+          this.props.navigation.navigate('Home'); 
         })
         .catch(error => {
           console.error('Error al crear post:', error);
           this.setState({ error: 'Error al crear el post' });
         });
-    } else {
-      this.props.navigation.navigate('Login');
     }
   }
 
@@ -69,8 +68,6 @@ export default class CrearPosteo extends Component {
         
         <TextInput
           style={styles.input}
-          multiline
-          numberOfLines={4}
           placeholder="Escribe tu post aquí..."
           value={this.state.textoPost}
           onChangeText={(texto) => this.setState({ textoPost: texto, error: null })}
@@ -89,3 +86,43 @@ export default class CrearPosteo extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+    color: '#333',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 15,
+    marginBottom: 20,
+    fontSize: 16,
+    minHeight: 150,
+    textAlignVertical: 'top',
+  },
+  boton: {
+    backgroundColor: '#3897f0',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  textoBoton: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  error: {
+    color: 'red',
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+});
