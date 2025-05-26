@@ -1,17 +1,30 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
-import Registro from '../screens/Registro';
-import Login from '../screens/Login';
+import Perfil from '../screens/MiPerfil';
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
 function TabNavigation() {
-    return(
-        <Tab.Navigator>
-            <Tab.Screen name="Home" component={Home} />   
-            <Tab.Screen name="Registro" component={Registro} />
-             <Tab.Screen name="Login" component={Login} />
+    return (
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ color, size }) => {
+                    let iconName;
+
+                    if (route.name === 'Home') {
+                        iconName = 'home';
+                    } else if (route.name === 'Perfil') {
+                        iconName = 'person';
+                    }
+
+                    return <Ionicons name={iconName} size={size} color={color} />;
+                },
+            })}
+        >
+            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Perfil" component={Perfil} />
         </Tab.Navigator>
     );
 }

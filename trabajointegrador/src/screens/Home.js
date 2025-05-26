@@ -34,7 +34,7 @@ class Home extends Component{
                 />
 
                 <TouchableOpacity
-                    onPress={()=> this.redireccionar('Tab')}
+                    onPress={()=> this.redireccionar('TabNavigation')}
                 >
                     <Text>
                         Entrar a la aplicacion
