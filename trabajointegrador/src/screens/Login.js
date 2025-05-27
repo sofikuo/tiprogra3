@@ -20,7 +20,7 @@ class Login extends Component {
         this.props.navigation.replace('MainTabs'); 
       })
       .catch(error => {
-        this.setState({ error: 'Credenciales inválidas.' });
+        this.setState({ error: 'Datos inválidos' });
         console.error(error);
       });
   }
