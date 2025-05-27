@@ -27,8 +27,8 @@ function TabNavigation() {
             })}
         >
             <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Perfil" component={Perfil} />
             <Tab.Screen name="Crear Posteo" component={CrearPosteo} />
+            <Tab.Screen name="Perfil" component={Perfil} />
         </Tab.Navigator>
     );
 }

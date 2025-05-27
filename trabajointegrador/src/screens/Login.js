@@ -13,6 +13,17 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    auth.onAuthStateChanged(user => {
+      console.log(user);
+      if (user) {
+        console.log('Usuario logueado:', auth.currentUser.email);
+        this.props.navigation.navigate('MainTabs');
+      }
+    });
+  }
+  
+  
   login(email, pass) {
     auth.signInWithEmailAndPassword(email, pass)
       .then(() => {

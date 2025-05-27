@@ -21,10 +21,9 @@ export default class Registro extends Component {
     componentDidMount() {
         auth.onAuthStateChanged(user => {
             if (user) {
-                this.props.navigation.navigate('Tab')
+                this.props.navigation.navigate('MainTabs')
             }
-        }
-        )
+        })
     }
 
     registrarUsuario(email, password, username) {  // si aca hay definidas dos variables, donce las tengo que llamar? abajo
@@ -49,10 +48,10 @@ export default class Registro extends Component {
                         username: username
                     })
                         .then(() => {
-                            this.props.navigation.navigate('Tab')
+                            this.props.navigation.navigate('MainTabs')
                         })
 
-                    this.props.navigation.navigate('Tab')
+                    this.props.navigation.navigate('MainTabs')
                 })
                 .catch(error => console.log('error', error))
         }
@@ -60,92 +59,86 @@ export default class Registro extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <TextInput
-                    style={
-                        styles.input
-                    }
+                    style={styles.input}
                     keyboardType='default'
                     value={this.state.email}
                     onChangeText={(texto) => this.setState({ email: texto, error: false })}
-                    placeholder='Ingresa tu email'
+                    placeholder='email'
                 />
                 <TextInput
-                    style={
-                        styles.input
-                    }
+                    style={styles.input}
                     keyboardType='default'
                     value={this.state.password}
                     onChangeText={(texto) => this.setState({ password: texto, error: false })}
-                    placeholder='Ingresa tu password'
+                    placeholder='password'
                     secureTextEntry={true}
                 />
                 <TextInput
-                    style={
-                        styles.input
-                    }
+                    style={styles.input}
                     keyboardType='default'
                     value={this.state.username}
                     onChangeText={(texto) => this.setState({ username: texto, error: false })}
-                    placeholder='Ingresa tu usuario'
+                    placeholder='usuario'
                 />
+
                 <TouchableOpacity
+                    style={styles.button}
                     onPress={() => {
                         this.registrarUsuario(this.state.email, this.state.password, this.state.username);
                         this.props.navigation.navigate('Login');
                     }}
                 >
-                    <Text>Registrarme</Text>
+                    <Text style={styles.buttonText}>Registrarme</Text>
                 </TouchableOpacity>
-                {
-                    this.state.error ? <Text>Credenciales invalidas</Text> : null
-                }
+
+                {this.state.error ? (
+                    <Text style={styles.error}>Credenciales inválidas</Text>
+                ) : null}
+
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                    <Text style={styles.link}>Haz Login aquí</Text>
+                </TouchableOpacity>
             </View>
+
         )
     }
 }
 const styles = StyleSheet.create({
     container: {
+        padding: 20,
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-        backgroundColor: '#f5f5f5'
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 30,
-        color: '#333'
+        backgroundColor: '#fff'
     },
     input: {
-        width: '100%',
-        height: 50,
         borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 8,
-        paddingHorizontal: 15,
-        marginBottom: 15,
-        backgroundColor: '#fff',
-        fontSize: 16
+        borderColor: '#ccc',
+        marginBottom: 12,
+        padding: 10,
+        borderRadius: 5,
+    },
+    error: {
+        color: 'red',
+        marginBottom: 10,
+        textAlign: 'center'
+    },
+    link: {
+        color: 'black',
+        marginTop: 15,
+        textAlign: 'center',
     },
     button: {
-        width: '100%',
-        height: 50,
-        backgroundColor: '#4285f4',
-        borderRadius: 8,
-        justifyContent: 'center',
+        backgroundColor: 'gray',
+        padding: 12,
+        borderRadius: 5,
         alignItems: 'center',
-        marginTop: 10
+        marginTop: 10,
     },
     buttonText: {
-        color: 'white',
-        fontSize: 18,
-        fontWeight: 'bold'
-    },
-    errorText: {
-        color: 'red',
-        marginTop: 20,
-        fontSize: 16
+        color: '#fff',
+        fontWeight: 'bold',
+        textTransform: 'uppercase'
     }
-})
+});
