@@ -30,7 +30,7 @@ class MiPerfil extends Component {
           });
         });
         if (usuarios.length > 0) {
-          this.setState({ 
+          this.setState({
             username: usuarios[0].data.username || ''
           });
         }
@@ -49,7 +49,7 @@ class MiPerfil extends Component {
             data: doc.data()
           });
         });
-        this.setState({ 
+        this.setState({
           posteos: posts
         });
       });
@@ -82,10 +82,19 @@ class MiPerfil extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.titulo}>Perfil</Text>
+
         <Text>Usuario: {this.state.username}</Text>
         <Text>Email: {this.state.email}</Text>
 
         <Text style={styles.subtitulo}>Tus posteos</Text>
+        
+        <TouchableOpacity
+          style={styles.botonCrearPost}
+          onPress={() => this.props.navigation.navigate('CrearPosteo')}
+        >
+          <Text style={styles.textoCrearPost}>Crear Nuevo Post</Text>
+        </TouchableOpacity>
+
         {this.state.posteos.length === 0 ? (
           <Text>No hay posteos</Text>
         ) : (
@@ -94,9 +103,8 @@ class MiPerfil extends Component {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View style={styles.post}>
-              
-                <TouchableOpacity 
-                  style={styles.botonBorrar} 
+                <TouchableOpacity
+                  style={styles.botonBorrar}
                   onPress={() => this.eliminarPosteo(item.id)}
                 >
                   <Text style={styles.textoBorrar}>Borrar</Text>
@@ -106,8 +114,8 @@ class MiPerfil extends Component {
           />
         )}
 
-        <TouchableOpacity 
-          style={styles.botonLogout} 
+        <TouchableOpacity
+          style={styles.botonLogout}
           onPress={() => this.logout()}
         >
           <Text style={styles.textoLogout}>Cerrar sesión</Text>
@@ -118,49 +126,49 @@ class MiPerfil extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: { 
-    padding: 20, 
-    flex: 1 
+  container: {
+    padding: 20,
+    flex: 1
   },
-  titulo: { 
-    fontSize: 24, 
-    fontWeight: 'bold', 
-    marginBottom: 10 
+  titulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10
   },
-  subtitulo: { 
-    marginTop: 20, 
-    fontSize: 18, 
-    fontWeight: '600' 
+  subtitulo: {
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: '600'
   },
-  post: { 
-    paddingVertical: 10, 
-    borderBottomWidth: 1, 
+  post: {
+    paddingVertical: 10,
+    borderBottomWidth: 1,
     borderColor: '#ccc',
-    marginBottom: 10 
+    marginBottom: 10
   },
-  botonBorrar: { 
-    backgroundColor: '#e74c3c', 
-    marginTop: 5, 
+  botonBorrar: {
+    backgroundColor: '#e74c3c',
+    marginTop: 5,
     padding: 8,
-    borderRadius: 4, 
+    borderRadius: 4,
     width: 80,
     alignSelf: 'flex-end'
   },
-  textoBorrar: { 
-    color: 'white', 
-    textAlign: 'center' 
+  textoBorrar: {
+    color: 'white',
+    textAlign: 'center'
   },
-  botonLogout: { 
-    marginTop: 30, 
-    backgroundColor: 'gray', 
-    padding: 12, 
+  botonLogout: {
+    marginTop: 30,
+    backgroundColor: 'gray',
+    padding: 12,
     borderRadius: 5,
     marginHorizontal: 50
   },
-  textoLogout: { 
-    color: 'white', 
-    textAlign: 'center', 
-    fontWeight: 'bold' 
+  textoLogout: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold'
   }
 });
 
