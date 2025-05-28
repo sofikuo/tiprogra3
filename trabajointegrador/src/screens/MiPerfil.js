@@ -39,7 +39,7 @@ class MiPerfil extends Component {
 
   traerPosteos() {
     db.collection('posts')
-      .where('owner', '==', this.state.email)
+      .where('emailCreador', '==', this.state.email)
       .orderBy('createdAt', 'desc')
       .onSnapshot(docs => {
         let posts = [];
@@ -67,7 +67,17 @@ class MiPerfil extends Component {
         });
       })
       .then(() => {
-        this.traerPosteos();
+        db.collection('posts')
+          .doc(postId)
+          .update({
+            texto: '',
+            likes: [],
+            emailCreador: '',
+            createdAt: null
+          });
+      })
+      .then(() => {
+        this.props.navigation.navigate('Home');
       })
       .catch(error => console.log('Error', error));
   }
@@ -87,13 +97,6 @@ class MiPerfil extends Component {
         <Text>Email: {this.state.email}</Text>
 
         <Text style={styles.subtitulo}>Tus posteos</Text>
-        
-        <TouchableOpacity
-          style={styles.botonCrearPost}
-          onPress={() => this.props.navigation.navigate('CrearPosteo')}
-        >
-          <Text style={styles.textoCrearPost}>Crear Nuevo Post</Text>
-        </TouchableOpacity>
 
         {this.state.posteos.length === 0 ? (
           <Text>No hay posteos</Text>
@@ -103,6 +106,12 @@ class MiPerfil extends Component {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View style={styles.post}>
+                <Text style={styles.postText}>{item.data.texto}</Text>
+
+                <Text style={styles.likesText}>
+                  Cantidad de likes recibidos: {item.data.likes ? item.data.likes.length : 0}
+                </Text>
+
                 <TouchableOpacity
                   style={styles.botonBorrar}
                   onPress={() => this.eliminarPosteo(item.id)}
@@ -146,8 +155,13 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     marginBottom: 10
   },
+  postText: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 6
+  },
   botonBorrar: {
-    backgroundColor: '#e74c3c',
+    backgroundColor: 'grey',
     marginTop: 5,
     padding: 8,
     borderRadius: 4,
@@ -166,6 +180,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 50
   },
   textoLogout: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  botonCrearPost: {
+    marginTop: 10,
+    backgroundColor: '#2980b9',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20
+  },
+  textoCrearPost: {
     color: 'white',
     textAlign: 'center',
     fontWeight: 'bold'
