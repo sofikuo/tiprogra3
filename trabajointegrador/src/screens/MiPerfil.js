@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import Post from '../components/Post';
 import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
 
@@ -40,15 +41,14 @@ class MiPerfil extends Component {
   traerPosteos() {
     db.collection('posts')
       .where('emailCreador', '==', this.state.email)
-      .orderBy('createdAt', 'desc')
       .onSnapshot(docs => {
-        let posts = [];
-        docs.forEach(doc => {
-          posts.push({
-            id: doc.id,
-            data: doc.data()
-          });
-        });
+        let posts = docs.docs.map(doc => ({
+          id: doc.id,
+          data: doc.data()
+        }));
+
+        posts.sort((a, b) => b.data.createdAt - a.data.createdAt);
+
         this.setState({
           posteos: posts
         });
@@ -56,28 +56,11 @@ class MiPerfil extends Component {
   }
 
   eliminarPosteo(postId) {
-    db.collection('users')
-      .where('owner', '==', this.state.email)
-      .get()
-      .then(docs => {
-        docs.forEach(doc => {
-          doc.ref.update({
-            posts: firebase.firestore.FieldValue.arrayRemove(postId)
-          });
-        });
-      })
+    db.collection('posts')
+      .doc(postId)
+      .delete()
       .then(() => {
-        db.collection('posts')
-          .doc(postId)
-          .update({
-            texto: '',
-            likes: [],
-            emailCreador: '',
-            createdAt: null
-          });
-      })
-      .then(() => {
-        this.props.navigation.navigate('Home');
+          this.props.navigation.navigate('Home');
       })
       .catch(error => console.log('Error', error));
   }
@@ -90,7 +73,7 @@ class MiPerfil extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.contenedor}>
         <Text style={styles.titulo}>Perfil</Text>
 
         <Text>Usuario: {this.state.username}</Text>
@@ -103,24 +86,21 @@ class MiPerfil extends Component {
         ) : (
           <FlatList
             data={this.state.posteos}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={item => item.id.toString()}
             renderItem={({ item }) => (
-              <View style={styles.post}>
-                <Text style={styles.postText}>{item.data.texto}</Text>
-
-                <Text style={styles.likesText}>
-                  Cantidad de likes recibidos: {item.data.likes ? item.data.likes.length : 0}
-                </Text>
-
-                <TouchableOpacity
-                  style={styles.botonBorrar}
-                  onPress={() => this.eliminarPosteo(item.id)}
-                >
-                  <Text style={styles.textoBorrar}>Borrar</Text>
-                </TouchableOpacity>
-              </View>
+              <Post
+                texto={item.data.texto}
+                emailCreador={item.data.emailCreador}
+                createdAt={item.data.createdAt}
+                likes={item.data.likes}
+                emailUsuarioActual={auth.currentUser.email}
+                onLikePress={() => this.likePosteo(item.id, item.data.likes || [])}
+                mostrarLikes={false}
+                onEliminarPress={() => this.eliminarPosteo(item.id)}
+              />
             )}
           />
+
         )}
 
         <TouchableOpacity
@@ -135,7 +115,7 @@ class MiPerfil extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contenedor: {
     padding: 20,
     flex: 1
   },
@@ -159,18 +139,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     marginBottom: 6
-  },
-  botonBorrar: {
-    backgroundColor: 'grey',
-    marginTop: 5,
-    padding: 8,
-    borderRadius: 4,
-    width: 80,
-    alignSelf: 'flex-end'
-  },
-  textoBorrar: {
-    color: 'white',
-    textAlign: 'center'
   },
   botonLogout: {
     marginTop: 30,

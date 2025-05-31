@@ -7,7 +7,8 @@ import {
     ActivityIndicator,
     TouchableOpacity,
     FlatList
-} from 'react-native'
+} from 'react-native';
+import Post from '../components/Post';
 import { auth, db } from "../firebase/config";
 import firebase from 'firebase';
 
@@ -29,14 +30,14 @@ class Home extends Component {
             .onSnapshot(docs => {
                 let posts = [];
                 docs.forEach(doc => {
-                const data = doc.data();
-                if (data.texto && data.texto !== '') { 
-                    posts.push({
-                        id: doc.id,
-                        data: data
-                    });
-                }
-            });
+                    const data = doc.data();
+                    if (data.texto && data.texto !== '') {
+                        posts.push({
+                            id: doc.id,
+                            data: data
+                        });
+                    }
+                });
                 this.setState({
                     posts: posts,
                     loading: false
@@ -69,31 +70,24 @@ class Home extends Component {
             <View style={styles.contenedor}>
 
                 {this.state.loading ? (
-                    <Text>Cargando posts...</Text>
+                    <ActivityIndicator size="large" color="blue" />
                 ) : (
                     <FlatList
                         data={this.state.posts}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => (
-                            <View style={styles.postContainer}>
-                                <Text style={styles.postEmail}>{item.data.emailCreador}</Text>
-                                <Text style={styles.postText}>{item.data.texto}</Text>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <Text style={styles.postLikes}>
-                                        Cantidad de likes: {item.data.likes ? item.data.likes.length : 0}
-                                    </Text>
-                                    <TouchableOpacity
-                                        onPress={() => this.likePosteo(item.id, item.data.likes || [])}
-                                    >
-                                        <Text style={{ color: 'grey' }}>
-                                            {item.data.likes && item.data.likes.includes(auth.currentUser.email) ? 'No Me Gusta' : 'Me gusta'}
-                                        </Text>
-                                    </TouchableOpacity>
-                                </View>
-
-                            </View>
+                            <Post
+                                texto={item.data.texto}
+                                emailCreador={item.data.emailCreador}
+                                createdAt={item.data.createdAt}
+                                likes={item.data.likes}
+                                emailUsuarioActual={auth.currentUser.email}
+                                onLikePress={() => this.likePosteo(item.id, item.data.likes || [])}
+                                mostrarLikes={true} 
+                            />
                         )}
                     />
+
                 )}
 
                 <TouchableOpacity
@@ -134,12 +128,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#333',
         marginBottom: 8,
-    },
-    postLikes: {
-        fontSize: 13,
-        color: '#888',
-        textAlign: 'right',
-    },
+    }
 });
 
 

@@ -22,13 +22,28 @@ class Login extends Component {
       }
     });
   }
-  
-  
+
+
   login(email, pass) {
+    if (email === '' || pass === '') {
+      this.setState({ error: 'Campos vacíos' });
+      return;
+    }
+
+    if (!email.includes('@')) {
+      this.setState({ error: 'El email no es válido' });
+      return;
+    }
+
+    if (pass.length < 6) {
+      this.setState({ error: 'Contraseña incorrecta' });
+      return;
+    }
+
     auth.signInWithEmailAndPassword(email, pass)
       .then(() => {
         this.setState({ loggedIn: true });
-        this.props.navigation.replace('MainTabs'); 
+        this.props.navigation.replace('MainTabs');
       })
       .catch(error => {
         this.setState({ error: 'Datos inválidos' });
@@ -43,23 +58,24 @@ class Login extends Component {
       <View style={styles.container}>
         <TextInput
           placeholder="email"
-          value={auth.email}
-          onChangeText={(text) => this.setState({ email: text })}
+          value={this.state.email}
+          onChangeText={(text) => this.setState({ email: text, error: '' })}
           style={styles.input}
         />
+
         <TextInput
           placeholder="password"
-          value={auth.password}
-          onChangeText={(text) => this.setState({ pass: text })}
+          value={this.state.pass}
+          onChangeText={(text) => this.setState({ pass: text, error: '' })}
           style={styles.input}
           secureTextEntry={true}
         />
         {error ? <Text style={styles.error}>{error}</Text> : null}
-        
+
         <Button
           title="Iniciar sesión"
           onPress={() => this.login(email, pass)}
-          color="gray" 
+          color="gray"
         />
 
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Registro')}>
