@@ -32,43 +32,60 @@ function Post(props) {
 
 const styles = StyleSheet.create({
     contenedor: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 10,
-        padding: 15,
-        marginBottom: 10,
-        backgroundColor: '#fff',
+        backgroundColor: '#fff0f5', // rosa pálido estilizado
+        padding: 16,
+        marginBottom: 16,
+        borderRadius: 16,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
+        elevation: 4,
     },
     email: {
+        fontSize: 14,
         fontWeight: 'bold',
-        marginBottom: 5,
+        color: '#3d3d3d',
+        marginBottom: 6,
     },
     texto: {
         fontSize: 16,
-        marginBottom: 8,
+        color: '#4a4a4a',
+        marginBottom: 12,
+        lineHeight: 22,
     },
-    botonesContainer: {
-        flexDirection: 'row',          
-        justifyContent: 'flex-end',
-        gap: 10                       
+    likesContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: 8,
     },
-    likeButton: {
-        color: 'black',
-        marginRight: 10,   
-        textAlign: 'right'           
+    iconoLike: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+    },
+    textoLike: {
+        marginLeft: 8,
+        fontSize: 16,
+        color: '#1e3d59',
+        fontWeight: '500',
+    },
+    cantidadLikes: {
+        fontSize: 14,
+        color: '#888',
     },
     botonBorrar: {
-        backgroundColor: 'grey',
-        paddingVertical: 6,
-        paddingHorizontal: 12,
-        borderRadius: 5,
+        marginTop: 12,
+        padding: 10,
+        backgroundColor: '#ffe0e0',
+        borderRadius: 8,
+        alignItems: 'center',
     },
     textoBorrar: {
-        color: 'white',
+        color: '#d62828',
         fontWeight: 'bold',
-        textAlign: 'center',
-
-    }
+    },
 });
 
 export default Post;

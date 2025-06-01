@@ -44,6 +44,7 @@ export default class CrearPosteo extends Component {
 
   render() {
     return (
+      
       <View style={styles.container}>
         <Text style={styles.title}>Crear nuevo post</Text>
         
@@ -70,40 +71,78 @@ export default class CrearPosteo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
+    padding: 24,
+    backgroundColor: '#fff', 
+    backgroundImage: 'linear-gradient(to bottom, #fff5f5 0%, #fafafa 100%)', // Degradado rosa-blancuzco
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontSize: 28,
+    fontWeight: '700',
+    marginBottom: 25,
     textAlign: 'center',
-    color: '#333',
+    color: '#6d6875',
+    fontFamily: 'Helvetica Neue', // Tipografía más delicada
+    letterSpacing: 0.3,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    padding: 15,
+    borderColor: 'rgba(255, 205, 178, 0.7)', // Borde melocotón translúcido
+    borderRadius: 18, // Bordes más redondeados
+    padding: 18,
     marginBottom: 20,
     fontSize: 16,
-    minHeight: 150,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Blanco semi-transparente
+    backdropFilter: 'blur(5px)', // Efecto vidrio esmerilado
+    minHeight: 160,
     textAlignVertical: 'top',
+    color: '#6d6875',
+    shadowColor: '#ffcdb2',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
   },
   boton: {
-    backgroundColor: '#3897f0',
-    padding: 15,
-    borderRadius: 8,
+    backgroundColor: '#b5838d',
+    paddingVertical: 16, // Más alto
+    paddingHorizontal: 32,
+    borderRadius: 28,
     alignItems: 'center',
+    shadowColor: '#b5838d',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 5,
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: 'rgba(181, 131, 141, 0.2)', // Detalle de borde sutil
   },
   textoBoton: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
+    color: '#fff',
+    fontSize: 18, // Un poco más grande
+    fontWeight: '600',
+    letterSpacing: 0.8,
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   error: {
-    color: 'red',
-    marginBottom: 15,
+    color: '#e5989b',
+    fontSize: 14,
+    marginBottom: 16,
     textAlign: 'center',
+    fontWeight: '500',
+    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+    padding: 8,
+    borderRadius: 10,
+  },
+  decoracionFondo: {
+    position: 'absolute',
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    backgroundColor: 'rgba(255, 205, 178, 0.15)', // Círculo difuminado
+    top: -50,
+    right: -50,
+    zIndex: -1,
   },
 });

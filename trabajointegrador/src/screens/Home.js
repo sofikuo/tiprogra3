@@ -70,7 +70,7 @@ class Home extends Component {
             <View style={styles.contenedor}>
 
                 {this.state.loading ? (
-                    <ActivityIndicator size="large" color="blue" />
+                    <ActivityIndicator size="large" color="#b5838d" />
                 ) : (
                     <FlatList
                         data={this.state.posts}
@@ -103,33 +103,61 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
     contenedor: {
-        flex: 1,
-        backgroundColor: '#f4f4f4',
-        padding: 16,
+      flex: 1,
+      padding: 16,
+      backgroundColor: '#fafafa', // Fondo sólido que matchea el degradado
     },
     postContainer: {
-        backgroundColor: '#fff',
-        padding: 16,
-        marginBottom: 12,
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-        elevation: 2,
+      backgroundColor: '#ffffff',
+      padding: 16,
+      marginBottom: 12,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: '#ffcdb2', // Borde melocotón
+      shadowColor: '#6d6875',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.05,
+      shadowRadius: 6,
+      elevation: 2,
     },
     postEmail: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: '#555',
-        marginBottom: 6,
+      fontSize: 14,
+      fontWeight: '600',
+      color: '#b5838d', // Rosa polvoriento
+      marginBottom: 6,
     },
     postText: {
-        fontSize: 16,
-        color: '#333',
-        marginBottom: 8,
+      fontSize: 16,
+      color: '#6d6875', // Gris lavanda
+      marginBottom: 8,
+      lineHeight: 22,
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      backgroundColor: '#fafafa', // Mismo fondo
+    },
+    decoracionFondo: {
+      position: 'absolute',
+      width: 200,
+      height: 200,
+      borderRadius: 100,
+      backgroundColor: 'rgba(255, 205, 178, 0.15)', // Círculo melocotón
+      top: -50,
+      right: -50,
+      zIndex: -1,
+    },
+    decoracionFondoSecundario: {
+      position: 'absolute',
+      width: 150,
+      height: 150,
+      borderRadius: 75,
+      backgroundColor: 'rgba(181, 131, 141, 0.1)', // Círculo rosa
+      bottom: -30,
+      left: -30,
+      zIndex: -1,
     }
-});
+  });
 
 
 export default Home;
