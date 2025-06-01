@@ -59,6 +59,9 @@ export default class Registro extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text style={styles.title}>
+                    Registro
+                </Text>
                 <TextInput
                     style={styles.input}
                     keyboardType='default'
@@ -106,68 +109,75 @@ export default class Registro extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-      padding: 24,
-      flex: 1,
-      justifyContent: 'center',
-      backgroundColor: '#fafafa', // Mismo fondo que Home/Perfil
+        padding: 24,
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#fafafa', // Mismo fondo que Home/Perfil
     },
     input: {
-      borderWidth: 1,
-      borderColor: '#ffcdb2', // Borde melocotón
-      marginBottom: 16,
-      padding: 14,
-      borderRadius: 12, // Bordes más redondeados
-      backgroundColor: '#ffffff',
-      fontSize: 16,
-      color: '#6d6875', // Texto gris lavanda
-      shadowColor: '#6d6875',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.05,
-      shadowRadius: 4,
-      elevation: 2,
+        borderWidth: 1,
+        borderColor: '#ffcdb2', // Borde melocotón
+        marginBottom: 16,
+        padding: 14,
+        borderRadius: 12, // Bordes más redondeados
+        backgroundColor: '#ffffff',
+        fontSize: 16,
+        color: '#6d6875', // Texto gris lavanda
+        shadowColor: '#6d6875',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+        elevation: 2,
     },
     button: {
-      backgroundColor: '#b5838d', // Rosa polvoriento
-      padding: 14,
-      borderRadius: 30, // Bordes muy redondeados
-      alignItems: 'center',
-      marginTop: 20,
-      shadowColor: '#b5838d',
-      shadowOffset: { width: 0, height: 3 },
-      shadowOpacity: 0.2,
-      shadowRadius: 6,
-      elevation: 3,
+        backgroundColor: '#b5838d', // Rosa polvoriento
+        padding: 14,
+        borderRadius: 30, // Bordes muy redondeados
+        alignItems: 'center',
+        marginTop: 20,
+        shadowColor: '#b5838d',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.2,
+        shadowRadius: 6,
+        elevation: 3,
     },
     buttonText: {
-      color: '#fff',
-      fontWeight: '600', // Semi-bold en lugar de bold
-      fontSize: 16,
-      letterSpacing: 0.5, // Espaciado elegante
+        color: '#fff',
+        fontWeight: '600', // Semi-bold en lugar de bold
+        fontSize: 16,
+        letterSpacing: 0.5, // Espaciado elegante
     },
     link: {
-      color: '#b5838d', // Rosa polvoriento
-      marginTop: 20,
-      textAlign: 'center',
-      fontSize: 14,
-      textDecorationLine: 'underline',
+        color: '#b5838d', // Rosa polvoriento
+        marginTop: 20,
+        textAlign: 'center',
+        fontSize: 14,
+        textDecorationLine: 'underline',
     },
     error: {
-      color: '#e5989b', // Rosa suave para errores
-      marginBottom: 16,
-      textAlign: 'center',
-      backgroundColor: 'rgba(229, 152, 155, 0.1)',
-      padding: 8,
-      borderRadius: 8,
+        color: '#e5989b', // Rosa suave para errores
+        marginBottom: 16,
+        textAlign: 'center',
+        backgroundColor: 'rgba(229, 152, 155, 0.1)',
+        padding: 8,
+        borderRadius: 8,
     },
     decoracionFondo: {
-      position: 'absolute',
-      width: 200,
-      height: 200,
-      borderRadius: 100,
-      backgroundColor: 'rgba(255, 205, 178, 0.15)',
-      top: -50,
-      right: -50,
-      zIndex: -1,
+        position: 'absolute',
+        width: 200,
+        height: 200,
+        borderRadius: 100,
+        backgroundColor: 'rgba(255, 205, 178, 0.15)',
+        top: -50,
+        right: -50,
+        zIndex: -1,
     },
-  });
+    title: {
+        fontSize: 28,
+        fontWeight: '700',
+        color: '#6d6875',
+        marginBottom: 32,
+        textAlign: 'center',
+      },
+});
 
