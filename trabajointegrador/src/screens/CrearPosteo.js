@@ -7,19 +7,8 @@ export default class CrearPosteo extends Component {
     super(props);
     this.state = {
       textoPost: '',
-      error: null,
-      usuarioLogueado: null
+      error: null
     };
-  }
-
-  componentDidMount() {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        this.setState({ usuarioLogueado: user });
-      } else {
-        this.props.navigation.navigate('Login');
-      }
-    });
   }
 
   crearPost() {
@@ -54,14 +43,6 @@ export default class CrearPosteo extends Component {
   }
 
   render() {
-    if (!this.state.usuarioLogueado) {
-      return (
-        <View style={styles.container}>
-          <Text>Cargando...</Text>
-        </View>
-      );
-    }
-
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Crear nuevo post</Text>

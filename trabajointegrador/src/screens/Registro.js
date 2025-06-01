@@ -48,12 +48,11 @@ export default class Registro extends Component {
                         username: username
                     })
                         .then(() => {
-                            this.props.navigation.navigate('MainTabs')
+                            this.props.navigation.navigate('MainTabs');
                         })
-
-                    this.props.navigation.navigate('MainTabs')
+                        .catch(error => console.log('Error al guardar en Firestore:', error));
                 })
-                .catch(error => console.log('error', error))
+                .catch(error => console.log('Error al crear usuario:', error));
         }
     }
 
@@ -87,11 +86,11 @@ export default class Registro extends Component {
                     style={styles.button}
                     onPress={() => {
                         this.registrarUsuario(this.state.email, this.state.password, this.state.username);
-                        this.props.navigation.navigate('Login');
                     }}
                 >
                     <Text style={styles.buttonText}>Registrarme</Text>
                 </TouchableOpacity>
+
 
                 {this.state.error ? (
                     <Text style={styles.error}>Credenciales inválidas</Text>
