@@ -56,6 +56,10 @@ class Login extends Component {
 
     return (
       <View style={styles.container}>
+        <Text style={styles.title}>
+          Iniciar Sesión
+        </Text>
+
         <TextInput
           placeholder="email"
           value={this.state.email}
@@ -72,11 +76,12 @@ class Login extends Component {
         />
         {error ? <Text style={styles.error}>{error}</Text> : null}
 
-        <Button
-          title="Iniciar sesión"
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => this.login(email, pass)}
-          color="gray"
-        />
+        >
+          <Text style={styles.buttonText}>Iniciar sesión</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Registro')}>
           <Text style={styles.link}>Regístrate aquí</Text>
@@ -91,25 +96,25 @@ const styles = StyleSheet.create({
     padding: 24,
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#fafafa', // Mismo fondo degradado
+    backgroundColor: '#fafafa',
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ffcdb2', // Borde melocotón
+    borderColor: '#ffcdb2',
     marginBottom: 16,
     padding: 14,
-    borderRadius: 12, // Bordes más redondeados
+    borderRadius: 12,
     backgroundColor: '#ffffff',
     fontSize: 16,
-    color: '#6d6875', // Texto gris lavanda
+    color: '#6d6875',
     shadowColor: '#6d6875',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 4,
     elevation: 2,
   },
-  Button: { // Para reemplazar el Button nativo
-    backgroundColor: '#b5838d', // Rosa polvoriento
+  button: {
+    backgroundColor: '#b5838d',
     padding: 14,
     borderRadius: 30,
     alignItems: 'center',
@@ -124,16 +129,17 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '600',
     fontSize: 16,
+    letterSpacing: 0.5,
   },
   link: {
-    color: '#b5838d', // Rosa polvoriento
+    color: '#b5838d',
     marginTop: 20,
     textAlign: 'center',
     fontSize: 14,
     textDecorationLine: 'underline',
   },
   error: {
-    color: '#e5989b', // Rosa suave para errores
+    color: '#e5989b',
     marginBottom: 16,
     textAlign: 'center',
     backgroundColor: 'rgba(229, 152, 155, 0.1)',
@@ -150,6 +156,13 @@ const styles = StyleSheet.create({
     right: -50,
     zIndex: -1,
   },
-  
+  title: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#6d6875',
+    marginBottom: 32,
+    textAlign: 'center',
+  },
 });
+
 export default Login;
