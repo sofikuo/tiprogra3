@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 function Post(props) {
     const { texto, emailCreador, createdAt, likes, onLikePress, mostrarLikes, onEliminarPress } = props;
@@ -12,12 +13,14 @@ function Post(props) {
             {mostrarLikes && (
                 <View style={styles.likesContainer}>
                     <Text>Cantidad de likes: {likes ? likes.length : 0}</Text>
-                    <Text
-                        style={styles.likeButton}
-                        onPress={onLikePress}
-                    >
-                        {likes && likes.includes(props.emailUsuarioActual) ? 'No Me Gusta' : 'Me gusta'}
-                    </Text>
+                    <TouchableOpacity style={styles.likeButtonContainer} onPress={onLikePress}>
+                        <AntDesign
+                            name={likes && likes.includes(props.emailUsuarioActual) ? 'heart' : 'hearto'}
+                            size={20}
+                            color="pink"
+                            style={{ marginRight: 5 }}
+                    />
+                    </TouchableOpacity>
                 </View>
             )}
 
