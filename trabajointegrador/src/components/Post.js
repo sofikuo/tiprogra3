@@ -20,6 +20,12 @@ function Post(props) {
                             color="pink"
                             style={{ marginRight: 5 }}
                     />
+                    <Text
+                        style={styles.likeButton}
+                        onPress={onLikePress}
+                    >
+                        {likes && likes.includes(props.emailUsuarioActual) ? 'No Me Gusta' : 'Me gusta'}
+                    </Text>
                     </TouchableOpacity>
                 </View>
             )}
