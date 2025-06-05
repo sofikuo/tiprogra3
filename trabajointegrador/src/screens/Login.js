@@ -43,7 +43,7 @@ class Login extends Component {
     auth.signInWithEmailAndPassword(email, pass)
       .then(() => {
         this.setState({ loggedIn: true });
-        this.props.navigation.replace('MainTabs');
+        this.props.navigation.navigate('MainTabs');
       })
       .catch(error => {
         this.setState({ error: 'Datos inválidos' });
